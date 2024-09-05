@@ -2,45 +2,28 @@
 
 import numpy as np
 
-def myFactorial(x):
+def my_factorial(x):
     s = 1.0
     for k in range(x):
         s = (k+1)*s
     return s
 
-
-def myExp(x):
+def my_exp(x):
     x0 = int(round(x))
     z = 1.0 * x - x0
     econst = 2.7182818284590451
     expx0 = econst ** x0
     s = 1
+    k = 0
     for k in range(x0):
-        s += (z**(k+1)) / myFactorial(k + 1)
+        s += (z**(k+1)) / my_factorial(k + 1)
+    print("iteration count:", k)
     return expx0**s
 
+def my_new_exp(x):
+    print("Need to implement")
 
-def myLn(x):
-    s = x
-    tol = 1e-10
-    for i in range(100):
-        s_next = s - 1 + x * myExp(-s)
-        if abs(s_next - s) < tol:
-            return s_next
-        s = s_next
-    return s
-
-def newtons_ln(x):
-    s = x
-    tol = 1e-10
-    for i in range(100):
-        s_next = s - 1 + x * myExp(-s)
-        if abs(s_next - s) < tol:
-            return s_next
-        s = s_next
-    return s
-
-def mySqrt(x):
+def my_sqrt(x):
     if x > 0:
         kmax = 100
         s = 1.0
@@ -51,3 +34,27 @@ def mySqrt(x):
         return 0.0
     else:
         return np.nan
+def my_ln(x):
+    ln2 = 0.6931471805599453
+    tolerance = 1e-10
+
+    n = 0
+
+    while x > 2:
+        x /= 2
+        n += 1
+    while x < 0.5:
+        x *= 2
+        n -= 1
+
+    z = (x - 1) / (x + 1)
+    z_squared = z * z
+    ln_approx = 0
+    term = 2 * z
+    i = 1
+
+    while abs(term) > tolerance:
+        ln_approx += term
+        term *= z_squared * (2 * i - 1) / (2 * i + 1)
+        i += 1
+    return ln_approx + n * ln2
