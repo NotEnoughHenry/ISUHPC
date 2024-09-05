@@ -21,7 +21,19 @@ def my_exp(x):
     return expx0**s
 
 def my_new_exp(x):
-    print("Need to implement")
+    max_iterations = 100
+    tolerance = 1e-10
+    s = 1.0
+    k = 0
+    for k in range(max_iterations):
+        ln_s = my_ln(s)
+        s_next = s * (1 + x - ln_s)
+        if abs(s_next - s) < tolerance:
+            print("iteration count:", k)
+            return s_next
+        s = s_next
+    print("iteration count:", k)
+    return s
 
 def my_sqrt(x):
     if x > 0:
@@ -34,25 +46,16 @@ def my_sqrt(x):
         return 0.0
     else:
         return np.nan
+
 def my_ln(x):
     ln2 = 0.6931471805599453
     tolerance = 1e-10
-
     n = 0
-
-    while x > 2:
-        x /= 2
-        n += 1
-    while x < 0.5:
-        x *= 2
-        n -= 1
-
     z = (x - 1) / (x + 1)
     z_squared = z * z
     ln_approx = 0
     term = 2 * z
     i = 1
-
     while abs(term) > tolerance:
         ln_approx += term
         term *= z_squared * (2 * i - 1) / (2 * i + 1)
