@@ -19,5 +19,4 @@ def my_gaussian(a, b):
         for j in range(i+1, n):
             sum = sum - a[i, j] * x[j]
         x[i] = sum / a[i,i]
-
     return x
