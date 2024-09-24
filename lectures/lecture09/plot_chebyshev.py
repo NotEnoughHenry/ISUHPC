@@ -1,7 +1,6 @@
 def PlotChebyshev():
     import matplotlib.pyplot as plt
 
-    # Read data from file
     x_vals = []
     y_vals = []
 
@@ -11,9 +10,6 @@ def PlotChebyshev():
             x_vals.append(x)
             y_vals.append(y)
 
-    print(x_vals)
-    print(y_vals)
-    # Plotting
     plt.plot(x_vals, y_vals, label="pN(x)")
     plt.title("Chebyshev Polynomial Sum")
     plt.xlabel("x")
